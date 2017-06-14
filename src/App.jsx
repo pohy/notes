@@ -3,6 +3,7 @@ import './App.css';
 import Note from './Note';
 import NoteComponent from './Note.jsx';
 import NoteInput from './NoteInput.jsx';
+import Masonry from 'react-masonry-component';
 
 class App extends Component {
     static NOTES_KEY = 'notes';
@@ -42,16 +43,16 @@ class App extends Component {
 
     render() {
         const {notes} = this.state;
+        const masonryOptions = {
+            itemSelector: '.Note',
+            fitWidth: true
+        };
         return (
             <div className="App">
                 <NoteInput onNoteAdd={this.addNote}/>
-                <div className="notes">
+                <Masonry className="notes" options={masonryOptions}>
                     {notes.filter(({archived}) => !archived).map(this.renderNote)}
-                </div>
-                <h4>Archived</h4>
-                <div className="notes archived">
-                    {notes.filter(({archived}) => !!archived).map(this.renderNote)}
-                </div>
+                </Masonry>
             </div>
         );
     }

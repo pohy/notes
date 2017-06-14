@@ -5,6 +5,7 @@
   "dependencies": {
     "react": "^15.6.0",
     "react-dom": "^15.6.0",
+    "react-masonry-component": "^5.0.7",
     "uuid": "^3.0.1"
   },
   "devDependencies": {
