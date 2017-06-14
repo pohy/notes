@@ -9,6 +9,10 @@
     border-right: none;
 }
 
+.NoteInput > button {
+    margin: 0;
+}
+
 @media (max-width: 600px) {
     .NoteInput > input {
         width: 8em;

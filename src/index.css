@@ -12,6 +12,11 @@ html, body {
     color: rgba(0, 0, 0, 0.93)
 }
 
+button {
+    margin: 0.1em;
+    max-height: 2em;
+}
+
 button, input {
     padding: 0.2em;
     background-color: white;
@@ -19,7 +24,14 @@ button, input {
 }
 
 button:hover {
-    background-color: lightgrey;
+    background-color: #f3f3f3;
     cursor: pointer;
 }
 
+.small-text, .small-text > * {
+    font-size: 14px;
+}
+
+.hidden {
+    display: none !important;
+}

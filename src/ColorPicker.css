@@ -1,0 +1,41 @@
+.ColorPicker {
+    position: relative;
+}
+
+.ColorPicker .palette-wrapper {
+    position: absolute;
+    width: 10em;
+    top: 1.5em;
+    left: 0;
+    z-index: 9;
+    height: 1em;
+}
+
+.ColorPicker .palette {
+    position: absolute;
+    display: none;
+    top: 0.2em;
+    line-height: 0;
+    padding: 0.2em;
+    z-index: 10;
+    border: 1px solid lightgrey;
+    background-color: white;
+}
+
+.ColorPicker .color:hover ~ .palette-wrapper .palette, .ColorPicker .palette-wrapper:hover .palette {
+    display: inline-block;
+}
+
+.ColorPicker .palette > button {
+    width: 0.8em;
+    height: 0.8em;
+    padding: 0;
+    margin: 2px;
+}
+
+.ColorPicker .palette > button.chosen:before {
+    font-size: 18px;
+    content: '✓';
+    vertical-align: super;
+    padding-left: 0.3em;
+}

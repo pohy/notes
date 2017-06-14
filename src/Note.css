@@ -15,10 +15,6 @@
     max-width: 12em;
 }
 
-.Note .text.small {
-    font-size: 18px
-}
-
 .Note:hover {
     box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.31);
 }
