@@ -1,0 +1,10 @@
+.NoteInput {
+    max-width: 1200px;
+    margin-top: 1em;
+    align-self: center;
+}
+
+.NoteInput > input {
+    width: 12em;
+    border-right: none;
+}
