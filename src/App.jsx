@@ -4,6 +4,7 @@ import Note from './Note';
 import NoteComponent from './Note.jsx';
 import NoteInput from './NoteInput.jsx';
 import Masonry from 'react-masonry-component';
+import {NavLink, Route} from 'react-router-dom';
 
 class App extends Component {
     static NOTES_KEY = 'notes';
@@ -41,18 +42,31 @@ class App extends Component {
 
     renderNote = (note, i) => <NoteComponent key={i} note={note} onUpdate={this.updateNote}/>;
 
-    render() {
-        const {notes} = this.state;
+    renderNotes = (filter) => () => {
         const masonryOptions = {
             itemSelector: '.Note',
             fitWidth: true
         };
         return (
+            <Masonry className="notes" options={masonryOptions}>
+                {this.state.notes.filter(filter).map(this.renderNote)}
+            </Masonry>
+        );
+    };
+
+    render() {
+        const {notes} = this.state;
+        return (
             <div className="App">
-                <NoteInput onNoteAdd={this.addNote}/>
-                <Masonry className="notes" options={masonryOptions}>
-                    {notes.filter(({archived}) => !archived).map(this.renderNote)}
-                </Masonry>
+                <ul className="menu">
+                    <li><NavLink className="middle-text" exact to="/">Notes</NavLink></li>
+                    <li><NavLink className="middle-text" to="/archived">Archived</NavLink></li>
+                </ul>
+                <div className="content">
+                    <NoteInput onNoteAdd={this.addNote}/>
+                    <Route exact path="/" render={this.renderNotes(({archived}) => !archived)}/>
+                    <Route path="/archived" render={this.renderNotes(({archived}) => !!archived)}/>
+                </div>
             </div>
         );
     }

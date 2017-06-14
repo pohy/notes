@@ -28,8 +28,12 @@ button:hover {
     cursor: pointer;
 }
 
+.middle-text, .middle-text > * {
+    font-size: 24px !important;
+}
+
 .small-text, .small-text > * {
-    font-size: 14px;
+    font-size: 14px !important;
 }
 
 .hidden {
