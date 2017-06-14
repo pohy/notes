@@ -8,3 +8,9 @@
     width: 12em;
     border-right: none;
 }
+
+@media (max-width: 600px) {
+    .NoteInput > input {
+        width: 8em;
+    }
+}
