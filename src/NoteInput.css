@@ -2,6 +2,14 @@
     max-width: 1200px;
     margin: 1em 0;
     align-self: center;
+    box-shadow: none;
+    outline: 9999px solid rgba(0, 0, 0, 0);
+    z-index: 12;
+}
+
+.NoteInput.focused {
+    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.31);
+    outline: 9999px solid rgba(0, 0, 0, 0.5);
 }
 
 .NoteInput > input {

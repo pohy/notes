@@ -4,12 +4,16 @@ import './NoteInput.css';
 
 class NoteInput extends Component {
     state = {
-        noteText: ''
+        noteText: '',
+        focused: false
     };
 
     componentWillReceiveProps({editedNote}) {
         if (editedNote) {
-            this.setState({noteText: editedNote.text});
+            this.setState({
+                noteText: editedNote.text,
+                focused: true
+            });
             this.noteInput.focus();
         }
     }
@@ -37,12 +41,26 @@ class NoteInput extends Component {
         if (editedNote) {
             this.props.onNoteAdd(editedNote);
         }
-        this.setState({noteText: ''});
+        this.setState({
+            noteText: '',
+            focused: false
+        });
+    };
+
+    setFocus = (focusValue) => () => {
+        const {editedNote} = this.props;
+        this.setState({focused: editedNote && focusValue});
+        // When note is being edited, and focus is lost
+        if (editedNote && this.state.focused && !focusValue) {
+            this.cancel();
+        }
     };
 
     render() {
+        const noteInputClasses = `NoteInput ${this.state.focused ? 'focused' : ''}`;
         return (
-            <form className="NoteInput" onSubmit={this.addNote}>
+            <form className={noteInputClasses} onSubmit={this.addNote}>
+                {/*TODO: what about scrolling and overlay?*/}
                 <input
                     type="text"
                     placeholder="Note..."
@@ -51,6 +69,8 @@ class NoteInput extends Component {
                     autoFocus
                     ref={(input) => { this.noteInput = input; }}
                     onKeyUp={this.onKey}
+                    onFocus={this.setFocus(true)}
+                    onBlur={this.setFocus(false)}
                 />
                 <button onClick={this.addNote}>{this.props.editedNote ? 'Update' : 'Add'}</button>
             </form>
