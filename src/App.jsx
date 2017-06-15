@@ -10,7 +10,8 @@ class App extends Component {
     static NOTES_KEY = 'notes';
 
     state = {
-        notes: []
+        notes: [],
+        editedNote: null
     };
 
     componentDidMount() {
@@ -27,7 +28,10 @@ class App extends Component {
 
     updateNotes = (notes) => {
         localStorage.setItem(App.NOTES_KEY, JSON.stringify(notes));
-        this.setState({notes: this.sortNotes(notes)});
+        this.setState({
+            notes: this.sortNotes(notes),
+            editedNote: null
+        });
     };
 
     updateNote = (newNote) => {
@@ -35,12 +39,18 @@ class App extends Component {
         this.updateNotes(newNotes);
     };
 
-    addNote = (note) => {
-        const newNotes = this.state.notes.concat(note);
+    addNote = (newNote) => {
+        const {notes} = this.state;
+        const existingNote = notes.find((note) => note.id === newNote.id);
+        const newNotes = existingNote
+                ? notes.map((note) => note.id === newNote.id ? newNote : note)
+                : this.state.notes.concat(newNote);
         this.updateNotes(newNotes);
     };
 
-    renderNote = (note, i) => <NoteComponent key={i} note={note} onUpdate={this.updateNote}/>;
+    editNote = (note) => this.setState({editedNote: note});
+
+    renderNote = (note, i) => <NoteComponent key={i} note={note} onUpdate={this.updateNote} onEdit={this.editNote}/>;
 
     renderNotes = (filter) => () => {
         const masonryOptions = {
@@ -55,7 +65,6 @@ class App extends Component {
     };
 
     render() {
-        const {notes} = this.state;
         return (
             <div className="App">
                 <ul className="menu">
@@ -63,7 +72,7 @@ class App extends Component {
                     <li><NavLink className="middle-text" to="/archived">Archived</NavLink></li>
                 </ul>
                 <div className="content">
-                    <NoteInput onNoteAdd={this.addNote}/>
+                    <NoteInput onNoteAdd={this.addNote} onNoteEdit={this.editNote} editedNote={this.state.editedNote}/>
                     <Route exact path="/" render={this.renderNotes(({archived}) => !archived)}/>
                     <Route path="/archived" render={this.renderNotes(({archived}) => !!archived)}/>
                 </div>

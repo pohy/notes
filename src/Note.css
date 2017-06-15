@@ -12,7 +12,8 @@
 }
 
 .Note .text {
-    max-width: 12em;
+    width: 100%;
+    cursor: text;
 }
 
 .Note:hover {
