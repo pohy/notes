@@ -6,7 +6,7 @@ import './index.css';
 import {BrowserRouter as Router} from 'react-router-dom';
 
 const Application = () => (
-    <Router>
+    <Router basename="/notes">
         <App/>
     </Router>
 );
