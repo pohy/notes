@@ -23,14 +23,3 @@
 .Note.archived {
     opacity: 0.6;
 }
-
-.Note .controls {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 0.3em;
-}
-
-.Note .controls > button {
-    font-size: 14px;
-}

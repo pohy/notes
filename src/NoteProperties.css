@@ -1,0 +1,14 @@
+.NoteProperties {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.3em;
+}
+
+.NoteProperties > button {
+    font-size: 14px;
+}
+
+.NoteProperties .property {
+    display: inline-block;
+}
