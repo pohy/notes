@@ -1,8 +1,13 @@
 import React, {Component} from 'react';
-import './ColorPicker.css';
+import PropTypes from 'prop-types';
 import Note from './Note';
+import './ColorPicker.css';
 
 class ColorPicker extends Component {
+    static propTypes = {
+        color: PropTypes.string.isRequired
+    };
+
     onColor = (color) => () => this.props.onColorChange(color);
 
     renderColorButton = (color, i) => {

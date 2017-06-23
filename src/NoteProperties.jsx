@@ -1,8 +1,15 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import ColorPicker from './ColorPicker.jsx';
+import Note from './Note';
 import './NoteProperties.css';
 
 class NoteProperties extends Component {
+    static propTypes = {
+        note: PropTypes.instanceOf(Note).isRequired,
+        onEdit: PropTypes.func.isRequired
+    };
+
     edit = (method) => (...args) => {
         const {note, onEdit} = this.props;
         onEdit(note[method].apply(note, args));

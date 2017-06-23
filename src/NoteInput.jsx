@@ -1,7 +1,14 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import Note from './Note';
 import './NoteInput.css';
 
 class NoteInput extends Component {
+    static propTypes = {
+        note: PropTypes.instanceOf(Note).isRequired,
+        onSubmit: PropTypes.func.isRequired
+    };
+
     state = {
         noteText: ''
     };

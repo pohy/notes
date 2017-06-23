@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import './App.css';
-import Note from './Note';
-import NoteComponent from './Note.jsx';
 import Masonry from 'react-masonry-component';
 import {NavLink, Route} from 'react-router-dom';
+import Note from './Note';
+import NoteComponent from './Note.jsx';
 import NoteEditor from './NoteEditor.jsx';
+import './App.css';
 
 class App extends Component {
     static NOTES_KEY = 'notes';

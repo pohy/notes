@@ -2,7 +2,6 @@
 
 ## Features
 
-- **PropTypes**
 - Tagging
 - Search
 - Moving between types

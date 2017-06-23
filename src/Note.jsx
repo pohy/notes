@@ -1,8 +1,15 @@
 import React, {Component} from 'react';
-import './Note.css';
+import PropTypes from 'prop-types';
 import NoteProperties from './NoteProperties.jsx';
+import Note from './Note';
+import './Note.css';
 
-class Note extends Component {
+class NoteComponent extends Component {
+    static propTypes = {
+        note: PropTypes.instanceOf(Note).isRequired,
+        onUpdate: PropTypes.func.isRequired
+    };
+
     static SMALL_TEXT_LENGTH = 14;
     static MAX_TEXT_LENGTH = 140;
 
@@ -21,4 +28,4 @@ class Note extends Component {
     }
 }
 
-export default Note;
+export default NoteComponent;
