@@ -2,16 +2,16 @@ import React, {Component} from 'react';
 import './App.css';
 import Note from './Note';
 import NoteComponent from './Note.jsx';
-import NoteInput from './NoteInput.jsx';
 import Masonry from 'react-masonry-component';
 import {NavLink, Route} from 'react-router-dom';
+import NoteEditor from './NoteEditor.jsx';
 
 class App extends Component {
     static NOTES_KEY = 'notes';
 
     state = {
         notes: [],
-        editedNote: null
+        editedNote: new Note()
     };
 
     componentDidMount() {
@@ -30,27 +30,20 @@ class App extends Component {
         localStorage.setItem(App.NOTES_KEY, JSON.stringify(notes));
         this.setState({
             notes: this.sortNotes(notes),
-            editedNote: null
+            editedNote: new Note()
         });
     };
 
     updateNote = (newNote) => {
-        const newNotes = this.state.notes.map((note) => note.id === newNote.id ? newNote : note);
-        this.updateNotes(newNotes);
-    };
-
-    addNote = (newNote) => {
         const {notes} = this.state;
         const existingNote = notes.find((note) => note.id === newNote.id);
         const newNotes = existingNote
                 ? notes.map((note) => note.id === newNote.id ? newNote : note)
-                : this.state.notes.concat(newNote);
+                : notes.concat(newNote);
         this.updateNotes(newNotes);
     };
 
-    editNote = (note) => this.setState({editedNote: note});
-
-    renderNote = (note, i) => <NoteComponent key={i} note={note} onUpdate={this.updateNote} onEdit={this.editNote}/>;
+    renderNote = (note, i) => <NoteComponent key={i} note={note} onUpdate={this.updateNote}/>;
 
     renderNotes = (filter) => () => {
         const masonryOptions = {
@@ -72,7 +65,7 @@ class App extends Component {
                     <li><NavLink className="middle-text" to="/archived">Archived</NavLink></li>
                 </ul>
                 <div className="content">
-                    <NoteInput onNoteAdd={this.addNote} onNoteEdit={this.editNote} editedNote={this.state.editedNote}/>
+                    <NoteEditor onEdit={this.updateNote} note={this.state.editedNote}/>
                     <Route exact path="/" render={this.renderNotes(({archived}) => !archived)}/>
                     <Route path="/archived" render={this.renderNotes(({archived}) => !!archived)}/>
                 </div>

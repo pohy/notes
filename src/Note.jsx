@@ -8,15 +8,13 @@ class Note extends Component {
 
     shortenText = (text) => text.length > Note.MAX_TEXT_LENGTH ? text.substring(0, Note.MAX_TEXT_LENGTH) + '...' : text;
 
-    onEdit = () => this.props.onEdit(this.props.note);
-
     render() {
         const {note: {text, archived, color}, note, onUpdate} = this.props;
         const noteClassses = `Note ${archived ? 'archived' : ''}`;
         const textClasses = `text ${text.length > Note.SMALL_TEXT_LENGTH ? 'small-text' : ''}`;
         return (
             <div className={noteClassses} style={{backgroundColor: color}}>
-                <p className={textClasses} onClick={this.onEdit}>{this.shortenText(text)}</p>
+                <p className={textClasses}>{this.shortenText(text)}</p>
                 <NoteProperties onEdit={onUpdate} note={note}/>
             </div>
         );

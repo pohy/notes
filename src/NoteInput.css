@@ -1,5 +1,5 @@
 .NoteInput {
-    max-width: 1200px;
+    width: 12em;
     margin: 1em 0;
     align-self: center;
     box-shadow: none;
@@ -7,22 +7,8 @@
     z-index: 12;
 }
 
-.NoteInput.focused {
-    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.31);
-    outline: 9999px solid rgba(0, 0, 0, 0.5);
-}
-
-.NoteInput > input {
-    width: 12em;
-    border-right: none;
-}
-
-.NoteInput > button {
-    margin: 0;
-}
-
 @media (max-width: 600px) {
-    .NoteInput > input {
+    .NoteInput {
         width: 8em;
     }
 }
