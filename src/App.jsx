@@ -21,15 +21,19 @@ class App extends Component {
     loadNotes() {
         const notesJSON = localStorage.getItem(App.NOTES_KEY);
         const notes = notesJSON ? (JSON.parse(notesJSON) || []).map(Note.fromData) : [];
-        return this.sortNotes(notes);
+        return this.prepareNotes(notes);
     }
 
+    filterDeleted = (notes) => notes.filter(({removed}) => !removed);
+
     sortNotes = (notes) => notes.sort((noteA, noteB) => noteA.created > noteB.created ? -1 : 1);
+
+    prepareNotes = (notes) => this.sortNotes(this.filterDeleted(notes));
 
     updateNotes = (notes) => {
         localStorage.setItem(App.NOTES_KEY, JSON.stringify(notes));
         this.setState({
-            notes: this.sortNotes(notes),
+            notes: this.prepareNotes(notes),
             editedNote: new Note()
         });
     };

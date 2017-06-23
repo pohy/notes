@@ -13,8 +13,11 @@ class NoteProperties extends Component {
         return (
             <div className="NoteProperties small-text">
                 <ColorPicker className="property" onColorChange={this.edit('setColor')} color={color}/>
-                <button className="archive property" onClick={this.edit('toggleArchived')}>
+                <button className="property" onClick={this.edit('toggleArchived')}>
                     {archived ? 'Restore' : 'Archive'}
+                </button>
+                <button className="property" onClick={this.edit('remove')}>
+                    Remove
                 </button>
             </div>
         );

@@ -16,7 +16,7 @@ export default class Note {
         this.created = new Date();
         this.text = text;
         this.archived = null;
-        this.deleted = null;
+        this.removed = null;
         this.color = Note.COLORS.WHITE;
     }
 
@@ -31,6 +31,11 @@ export default class Note {
         } else {
             this.color = color;
         }
+        return this;
+    }
+
+    remove() {
+        this.removed = new Date();
         return this;
     }
 
