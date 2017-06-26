@@ -23,9 +23,8 @@ class NoteEditor extends Component {
         onEdit(note);
     };
 
-    submitNote = (...args) => {
+    submitNote = () => {
         const {note, onSubmit} = this.props;
-        this.updateNoteProperty('text')(args);
         onSubmit(note);
     };
 
@@ -34,7 +33,7 @@ class NoteEditor extends Component {
 
         return (
             <div className="NoteEditor" style={{backgroundColor: color}}>
-                <NoteTextInput onSubmit={this.submitNote} note={note}/>
+                <NoteTextInput onSubmit={this.submitNote} onUpdate={this.updateNoteProperty('text')} note={note}/>
                 <NoteProperties {...{note, onEdit}}/>
             </div>
         );

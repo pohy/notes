@@ -6,33 +6,19 @@ import './NoteTextInput.css';
 class NoteTextInput extends Component {
     static propTypes = {
         note: PropTypes.instanceOf(Note).isRequired,
-        onSubmit: PropTypes.func.isRequired
+        onSubmit: PropTypes.func.isRequired,
+        onUpdate: PropTypes.func.isRequired
     };
 
-    state = {
-        noteText: ''
-    };
 
-    componentDidMount() {
-        this.noteTextFromNote(this.props.note);
+    onInput = ({target: {value}}) => {
+        this.props.onUpdate(value);
     }
-
-    componentWillReceiveProps(nextProps) {
-        this.noteTextFromNote(nextProps.note);
-    }
-
-    noteTextFromNote(note) {
-        if (note) {
-            this.setState({noteText: note.text});
-            this.noteInput.focus();
-        }
-    }
-
-    onInput = ({target: {value}}) => this.setState({noteText: value});
 
     submit = ({key}) => {
-        if (['Escape', 'Enter'].includes(key) && !!this.state.noteText) {
-            this.props.onSubmit(this.state.noteText);
+        const {onSubmit, note: {text}} = this.props;
+        if (['Escape', 'Enter'].includes(key) && !!text) {
+            onSubmit();
         }
     };
 
@@ -43,9 +29,8 @@ class NoteTextInput extends Component {
                 type="text"
                 placeholder="Note..."
                 onInput={this.onInput}
-                value={this.state.noteText}
+                value={this.props.note.text}
                 autoFocus
-                ref={(input) => { this.noteInput = input; }}
                 onKeyUp={this.submit}
             />
         );
