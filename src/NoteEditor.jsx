@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import NoteInput from './NoteInput.jsx';
+import NoteTextInput from './NoteTextInput.jsx';
 import Note from './Note';
 import NoteProperties from "./NoteProperties";
 import './NoteEditor.css';
@@ -34,7 +34,7 @@ class NoteEditor extends Component {
 
         return (
             <div className="NoteEditor" style={{backgroundColor: color}}>
-                <NoteInput onSubmit={this.submitNote} note={note}/>
+                <NoteTextInput onSubmit={this.submitNote} note={note}/>
                 <NoteProperties {...{note, onEdit}}/>
             </div>
         );

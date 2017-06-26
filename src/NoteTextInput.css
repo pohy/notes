@@ -1,4 +1,4 @@
-.NoteInput {
+.NoteTextInput {
     width: 12em;
     margin: 0;
     align-self: center;
@@ -8,7 +8,7 @@
 }
 
 @media (max-width: 600px) {
-    .NoteInput {
+    .NoteTextInput {
         width: 8em;
     }
 }

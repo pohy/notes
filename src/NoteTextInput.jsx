@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Note from './Note';
-import './NoteInput.css';
+import './NoteTextInput.css';
 
-class NoteInput extends Component {
+class NoteTextInput extends Component {
     static propTypes = {
         note: PropTypes.instanceOf(Note).isRequired,
         onSubmit: PropTypes.func.isRequired
@@ -39,7 +39,7 @@ class NoteInput extends Component {
     render() {
         return (
             <input
-                className="NoteInput"
+                className="NoteTextInput"
                 type="text"
                 placeholder="Note..."
                 onInput={this.onInput}
@@ -52,4 +52,4 @@ class NoteInput extends Component {
     }
 }
 
-export default NoteInput;
+export default NoteTextInput;
