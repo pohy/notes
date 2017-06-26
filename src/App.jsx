@@ -47,6 +47,8 @@ class App extends Component {
         this.updateNotes(newNotes);
     };
 
+    updateEditedNote = (note) => this.setState({editedNote: note});
+
     renderNote = (note, i) => <NoteComponent key={i} note={note} onUpdate={this.updateNote}/>;
 
     renderNotes = (filter) => () => {
@@ -69,7 +71,7 @@ class App extends Component {
                     <li><NavLink className="middle-text" to="/archived">Archived</NavLink></li>
                 </ul>
                 <div className="content">
-                    <NoteEditor onEdit={this.updateNote} note={this.state.editedNote}/>
+                    <NoteEditor onEdit={this.updateEditedNote} onSubmit={this.updateNote} note={this.state.editedNote}/>
                     <Route exact path="/" render={this.renderNotes(({archived}) => !archived)}/>
                     <Route path="/archived" render={this.renderNotes(({archived}) => !!archived)}/>
                 </div>

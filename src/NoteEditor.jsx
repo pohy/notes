@@ -2,11 +2,14 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import NoteInput from './NoteInput.jsx';
 import Note from './Note';
+import NoteProperties from "./NoteProperties";
+import './NoteEditor.css';
 
 class NoteEditor extends Component {
     static propTypes = {
         note: PropTypes.instanceOf(Note).isRequired,
-        onEdit: PropTypes.func.isRequired
+        onEdit: PropTypes.func.isRequired,
+        onSubmit: PropTypes.func.isRequired
     };
 
     updateNoteProperty = (property) => (...args) => {
@@ -20,10 +23,19 @@ class NoteEditor extends Component {
         onEdit(note);
     };
 
+    submitNote = (...args) => {
+        const {note, onSubmit} = this.props;
+        this.updateNoteProperty('text')(args);
+        onSubmit(note);
+    };
+
     render() {
+        const {note, onEdit} = this.props;
+
         return (
             <div className="NoteEditor">
-                <NoteInput onSubmit={this.updateNoteProperty('text')} note={this.props.note}/>
+                <NoteInput onSubmit={this.submitNote} note={note}/>
+                <NoteProperties {...{note, onEdit}}/>
             </div>
         );
     }
