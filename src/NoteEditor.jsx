@@ -30,10 +30,10 @@ class NoteEditor extends Component {
     };
 
     render() {
-        const {note, onEdit} = this.props;
+        const {note, onEdit, note: {color}} = this.props;
 
         return (
-            <div className="NoteEditor">
+            <div className="NoteEditor" style={{backgroundColor: color}}>
                 <NoteInput onSubmit={this.submitNote} note={note}/>
                 <NoteProperties {...{note, onEdit}}/>
             </div>
